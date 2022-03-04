@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-
 import { Context } from './context/AuthContext';
-
 import Home from './pages/Home';
-import Home2 from './pages/Home2';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import SignUp from './pages/SignUp';
 // import Loading from './Pages/Loading';
 
 const useAuth=()=>{
@@ -47,16 +47,14 @@ const ProtectedRoutes = (props) =>{
 // }
 
 export default function RoutesIndex() {
-  console.log('index');
   return (
     <Routes>
-      {console.log('rt')}
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/cadastro" element={<SignUp />} />
       <Route path="/" element={<ProtectedRoutes/>}>
-	          <Route path="/inhome" element={<Home2/>}></Route>
+	          <Route path="/dashboard" element={<Dashboard/>}></Route>
       </Route>
-      {/* <ProtectedRoutes exact path="/" component={Home} /> */}
-      {/* <ProtectedRoutes exact path="/login" component={Home} /> */}
     </Routes>
   );
 }
