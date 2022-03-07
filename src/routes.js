@@ -5,7 +5,9 @@ import { Context } from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Professional from './pages/Professional';
 import SignUp from './pages/SignUp';
+import CreateProfessional from './pages/CreateProfessional';
 // import Loading from './Pages/Loading';
 
 const useAuth=()=>{
@@ -15,7 +17,7 @@ const useAuth=()=>{
   // } else {
   //   return false
   // }
-  return false;
+  return true;
 }
 // import Dash from './pages/Dash';
 
@@ -54,6 +56,8 @@ export default function RoutesIndex() {
       <Route path="/cadastro" element={<SignUp />} />
       <Route path="/" element={<ProtectedRoutes/>}>
 	          <Route path="/dashboard" element={<Dashboard/>}></Route>
+	          <Route path="/professional/" element={<Professional/>}></Route>
+	          <Route path="/professional/cadastro" element={<CreateProfessional/>}></Route>
       </Route>
     </Routes>
   );
