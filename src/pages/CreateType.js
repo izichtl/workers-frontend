@@ -7,41 +7,22 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
-import RegiterCount from './Dashboard/RegiterCount';
-import Copyright from '../components/Copyright';
 import Drawer from '../components/Drawer';
 import AppBar from '../components/AppBar';
 import ToolBar from '../components/ToolBar';
 import SideBar from '../components/SideBar';
+import TypeForm from '../components/TypeForm';
 import api from '../service/api';
 
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [open, setOpen] = useState(true);
-  const [types, setTypes] = useState([]);
-  const [data, setData] = useState([]);
+  const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  useEffect(() => {
-    (async () => {
-      await api.get('/professional')
-        .then((response) => {
-          const { data } = response;
-          setData(data);
-        });
-    })();
-    (async () => {
-      await api.get('/type')
-        .then((response) => {
-          const { data } = response;
-          setTypes(data);
-        });
-    })();
-  }, []);
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -75,38 +56,11 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={5} lg={4}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <RegiterCount
-                    title={'Profissionais'}
-                    count={data.length}
-                    address={'/professional'}
-                  />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={5} lg={4}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <RegiterCount
-                    title={'Categorias'}
-                    count={types.length}
-                    address={'/categoria'}
-                  />
-                </Paper>
-              </Grid>
+            <Grid item xs={12}>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <TypeForm />
+              </Paper>
+            </Grid>
             </Grid>
           </Container>
         </Box>
@@ -115,6 +69,6 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
+export default function CreateType() {
   return <DashboardContent />;
 }
