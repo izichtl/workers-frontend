@@ -15,7 +15,7 @@ import Paper from '@mui/material/Paper';
 export default function TypeTable(props) {
   const { rows, types } = props;
 
-  const handlerTimeStamp = (timestamp) => { return format(new Date(timestamp), 'dd/mm/yyyy - HH:mm')}
+  const handlerTimeStamp = (timestamp) => { return format(new Date(timestamp), 'dd/MM/yyyy - HH:mm')}
 
   useEffect(() => {
   }, [types]);

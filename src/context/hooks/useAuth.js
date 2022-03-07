@@ -29,22 +29,18 @@ export default function useAuth() {
       password,
     });
 
-    // const response = await api.get('/l');
-    // const token = response.data;
-    // console.log(token);
-
     localStorage.setItem('token', JSON.stringify(response.data));
     api.defaults.headers.Authorization = `Bearer ${response.data}`;
     setUser(JSON.parse(localStorage.getItem('token')));
     setAuthenticated(true);
-    history.push('/clinic-select');
+    // history.push('/clinic-select');
   }
 
   function handleLogout() {
     setAuthenticated(false);
     localStorage.removeItem('token');
     api.defaults.headers.Authorization = undefined;
-    history.push('/login');
+    // history.push('/login');
   }
 
   return {

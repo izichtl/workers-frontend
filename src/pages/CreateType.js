@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -12,7 +11,6 @@ import AppBar from '../components/AppBar';
 import ToolBar from '../components/ToolBar';
 import SideBar from '../components/SideBar';
 import TypeForm from '../components/TypeForm';
-import api from '../service/api';
 
 
 const mdTheme = createTheme();

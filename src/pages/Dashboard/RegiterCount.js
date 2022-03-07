@@ -4,13 +4,8 @@ import Typography from '@mui/material/Typography';
 import Title from './Title';
 import { format } from 'date-fns';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function RegiterCount(props) {
   const { title, count, address } = props;
-  console.log(address);
   return (
     <React.Fragment>
       <Title>{title}</Title>
@@ -18,7 +13,7 @@ export default function RegiterCount(props) {
         Cadastrados: {count}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        {format(new Date(), 'dd/mm/yyy')}
+        {format(new Date(), 'dd/MM/yyyy')}
       </Typography>
       <div>
         <Link color="primary" href={address} >

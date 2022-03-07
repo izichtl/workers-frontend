@@ -12,43 +12,11 @@ import CreateProfessional from './pages/CreateProfessional';
 import CreateType from './pages/CreateType';
 // import Loading from './Pages/Loading';
 
-const useAuth=()=>{
-  // const user=localStorage.getItem('user')
-  // if(user){
-  //   return true
-  // } else {
-  //   return false
-  // }
-  return true;
-}
-// import Dash from './pages/Dash';
-
 const ProtectedRoutes = (props) =>{
-	console.log('a')
-
-  const auth=useAuth()
-
-
-  return auth?<Outlet/>: <Navigate to="/login"/>
+  const { loading, authenticated } = useContext(Context);
+  if (loading || authenticated) return <Outlet/>;
+  return <Navigate to="/login"/>
 }
-
-// function CustomRoute(props) {
-//   const { component } = props;
-//   // const { loading } = useContext(Context);
-//   // const authenticated = false;
-//   console.log('01')
-  
-//   // if (loading) {
-//   //   console.log('02')
-//   //   return <Home />;
-//   // }
-
-//   // if (isPrivate && !authenticated) {
-//   //   return <Route path="*" element={<Navigate to="/login" />} />;
-//   // }
-//   console.log('03')
-//   return <Route path="/" element={<component />} />;
-// }
 
 export default function RoutesIndex() {
   return (

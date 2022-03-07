@@ -3,7 +3,7 @@ import {
   Box, Container,
 } from '@mui/material';
 import { Player } from '@lottiefiles/react-lottie-player';
-import Loading from '../assets/Animation/Loading.json';
+
 
 const LoadingAnimation = () => (
   <>
@@ -22,7 +22,7 @@ const LoadingAnimation = () => (
         <Player
           autoplay
           loop
-          src={Loading}
+          // src={Loading}
           style={{ height: '100px', width: '100px' }}
         />
       </Container>

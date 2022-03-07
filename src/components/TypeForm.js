@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import {
@@ -30,6 +30,12 @@ export default function TypeForm() {
     color: 'info',
     status: false,
   });
+  let token = '';
+  if (localStorage.getItem('token')) token = localStorage.getItem('token').replace(/"/g,'');
+  const headers = {
+    headers: {
+      Authorization: token,
+    }}
   const handleCloseSnack = () => {
     setOpenSnack(false);
   };
@@ -58,7 +64,7 @@ export default function TypeForm() {
         await api.post('/type', {
           descricao,
           situacao: status,
-        })
+        }, headers)
           .then((response) => {
             if (response.status === 200)  {
               setSnackData({
@@ -77,13 +83,6 @@ export default function TypeForm() {
           status: false,
         });
         setOpenSnack(true);
-        // eslint-disable-next-line
-        console.error(err.response.data.error, 'error');
-        if (formik.isMountedRef.current) {
-          setStatus({ success: false });
-          setErrors({ submit: err.message });
-          setSubmitting(false);
-        }
       }
     },
   });
