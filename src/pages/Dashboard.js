@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect,} from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Context } from '../context/AuthContext';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -9,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import RegiterCount from './Dashboard/RegiterCount';
-import Copyright from '../components/Copyright';
 import Drawer from '../components/Drawer';
 import AppBar from '../components/AppBar';
 import ToolBar from '../components/ToolBar';

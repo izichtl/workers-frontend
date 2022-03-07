@@ -1,9 +1,5 @@
-import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Footer from './Footer'
+import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-import Link from '@mui/material/Link';
 const drawerWidth = 240;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(

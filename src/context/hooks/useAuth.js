@@ -8,7 +8,6 @@ export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [authUser, setUser] = useState(false);
-  const history = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -33,14 +32,12 @@ export default function useAuth() {
     api.defaults.headers.Authorization = `Bearer ${response.data}`;
     setUser(JSON.parse(localStorage.getItem('token')));
     setAuthenticated(true);
-    // history.push('/clinic-select');
   }
 
   function handleLogout() {
     setAuthenticated(false);
     localStorage.removeItem('token');
     api.defaults.headers.Authorization = undefined;
-    // history.push('/login');
   }
 
   return {

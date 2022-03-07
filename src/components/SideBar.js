@@ -8,7 +8,7 @@ import List from '@mui/material/List';
 
 
 export default function SideBar(props) {
-  const { toggleDrawer, open,  } = props;
+  const { toggleDrawer } = props;
   return (
     <React.Fragment>
       <Toolbar
