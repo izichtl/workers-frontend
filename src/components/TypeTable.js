@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   useEffect,
 } from 'react';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
