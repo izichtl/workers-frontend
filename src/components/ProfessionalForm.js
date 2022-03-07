@@ -82,7 +82,6 @@ export default function ProfessionalForm(props) {
           nome,
           telefone,
           email,
-          situacao,
         } = values;
         await api.post('/professional', {
           nome,
