@@ -4,16 +4,18 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import {
+  Grid,
+  Typography,
+} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
-import RegiterCount from './Dashboard/RegiterCount';
-import Copyright from '../components/Copyright';
 import Drawer from '../components/Drawer';
 import AppBar from '../components/AppBar';
 import ToolBar from '../components/ToolBar';
 import SideBar from '../components/SideBar';
 import api from '../service/api';
+import TypeTable from '../components/TypeTable';
 
 
 const mdTheme = createTheme();
@@ -21,24 +23,22 @@ const mdTheme = createTheme();
 function DashboardContent() {
   const [open, setOpen] = useState(true);
   const [types, setTypes] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([{
+    id: '',
+    descricao: '',
+    situacao: '',
+    createdat: '2022-03-06T17:38:02.198Z',
+  }]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   useEffect(() => {
     (async () => {
-      await api.get('/professional')
-        .then((response) => {
-          const { data } = response;
-          setData(data);
-        });
-    })();
-    (async () => {
       await api.get('/type')
         .then((response) => {
           const { data } = response;
-          setTypes(data);
+          setData(data);
         });
     })();
   }, []);
@@ -75,36 +75,17 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={5} lg={4}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <RegiterCount
-                    title={'Profissionais'}
-                    count={data.length}
-                    address={'/professional'}
-                  />
-                </Paper>
+              <Grid item xs={6}>
+                <Typography component="h1" variant="h5">
+                  Categorias Cadastradas
+                </Typography>
               </Grid>
-              <Grid item xs={12} md={5} lg={4}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <RegiterCount
-                    title={'Categorias'}
-                    count={types.length}
-                    address={'/categoria'}
-                  />
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <TypeTable
+                  rows={data}
+                  types={types}
+                />
                 </Paper>
               </Grid>
             </Grid>

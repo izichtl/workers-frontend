@@ -6,8 +6,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Professional from './pages/Professional';
+import Type from './pages/Type';
 import SignUp from './pages/SignUp';
 import CreateProfessional from './pages/CreateProfessional';
+import CreateType from './pages/CreateType';
 // import Loading from './Pages/Loading';
 
 const useAuth=()=>{
@@ -58,6 +60,8 @@ export default function RoutesIndex() {
 	          <Route path="/dashboard" element={<Dashboard/>}></Route>
 	          <Route path="/professional/" element={<Professional/>}></Route>
 	          <Route path="/professional/cadastro" element={<CreateProfessional/>}></Route>
+	          <Route path="/categoria" element={<Type />}></Route>
+	          <Route path="/categoria/cadastro" element={<CreateType/>}></Route>
       </Route>
     </Routes>
   );

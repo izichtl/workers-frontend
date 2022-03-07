@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   useEffect,
 } from 'react';
+import { format, parse } from 'date-fns';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,16 +12,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-export default function DenseTable(props) {
+export default function TypeTable(props) {
   const { rows, types } = props;
 
-  const handlerTypes = (typeId, typesArr) => {
-    let response = '';
-    typesArr.forEach(element => {
-      if (element.id === typeId) response = element.descricao;
-    });
-    return response;
-  }
+  const handlerTimeStamp = (timestamp) => { return format(new Date(timestamp), 'dd/mm/yyyy - HH:mm')}
 
   useEffect(() => {
   }, [types]);
@@ -29,26 +24,22 @@ export default function DenseTable(props) {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>NOME</TableCell>
-            <TableCell align="right">TELEFONE</TableCell>
-            <TableCell align="right">EMAIL</TableCell>
-            <TableCell align="right">TIPO PROFISSIONAL</TableCell>
+            <TableCell>DESCRIÇÃO</TableCell>
             <TableCell align="right">SITUAÇÃO</TableCell>
+            <TableCell align="right">CADASTRADA EM</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.nome}
+                {row.descricao}
               </TableCell>
-              <TableCell align="right">{row.telefone}</TableCell>
-              <TableCell align="right">{row.email}</TableCell>
-              <TableCell align="right">{handlerTypes(row.tipoprofissional, types)}</TableCell>
-              <TableCell align="right">{row.situacao ? 'Ativo' : 'Inativo'}</TableCell>
+              <TableCell align="right">{row.situacao ? 'Ativa' : 'Inativa'}</TableCell>
+              <TableCell align="right">{handlerTimeStamp(row.createdat)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

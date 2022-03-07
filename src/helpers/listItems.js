@@ -5,20 +5,19 @@ import {
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import CreateSharpIcon from '@material-ui/icons/CreateSharp';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 
 export const mainListItems = (
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
+        <Link href="/dashboard" >
         <DashboardIcon />
+        </Link>
       </ListItemIcon>
       <Link href="/dashboard" >
         <ListItemText primary="Home" />
@@ -36,49 +35,33 @@ export const mainListItems = (
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <CreateSharpIcon />
+        <Link href="/professional/cadastro" >
+        <PersonAddIcon />
+        </Link>
       </ListItemIcon>
       <Link href="/professional/cadastro" >
-        <ListItemText primary="Cadastrar" />
+        <ListItemText primary="Cadastrar Prof." />
       </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <BarChartIcon />
+        <Link href="/categoria" >
+          <PermIdentityIcon />
+        </Link>
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <Link href="/categoria" >
+        <ListItemText primary="Categoria" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <LayersIcon />
+        <Link href="/categoria/cadastro" >
+          <CreateSharpIcon />
+        </Link>
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
+        <Link href="/categoria/cadastro" >
+          <ListItemText primary="Cadastro Categoria" />
+        </Link>
     </ListItemButton>
   </React.Fragment>
 );
