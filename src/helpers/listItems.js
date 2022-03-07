@@ -1,4 +1,7 @@
 import * as React from 'react';
+import {
+  Link
+} from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import CreateSharpIcon from '@material-ui/icons/CreateSharp';
 
 export const mainListItems = (
   <React.Fragment>
@@ -16,19 +20,27 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <Link href="/dashboard" >
+        <ListItemText primary="Home" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
+        <Link href="/professional" >
         <PeopleIcon />
+        </Link>
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <Link href="/professional" >
+        <ListItemText primary="Profissionais" />
+      </Link>
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <CreateSharpIcon />
+      </ListItemIcon>
+      <Link href="/professional/cadastro" >
+        <ListItemText primary="Cadastrar" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>

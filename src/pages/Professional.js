@@ -1,28 +1,55 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import {
+  Grid,
+  Typography,
+} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
-import Chart from './Dashboard/Chart';
-import Deposits from './Dashboard/Deposits';
-import Orders from './Dashboard/Orders';
-import Copyright from '../components/Copyright';
 import Drawer from '../components/Drawer';
 import AppBar from '../components/AppBar';
 import ToolBar from '../components/ToolBar';
 import SideBar from '../components/SideBar';
+import api from '../service/api';
+import DenseTable from '../components/SimpleTable';
+
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [types, setTypes] = useState([]);
+  const [data, setData] = useState([{
+    nome: '',
+    telefone: '',
+    email: '',
+    tipoprofissional: '',
+    situacao: '',
+  }]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  useEffect(() => {
+    (async () => {
+      await api.get('/professional')
+        .then((response) => {
+          const { data } = response;
+          setData(data);
+        });
+    })();
+    (async () => {
+      await api.get('/type')
+        .then((response) => {
+          const { data } = response;
+          setTypes(data);
+        });
+    })();
+  }, []);
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -56,40 +83,20 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
+              <Grid item xs={6}>
+                <Typography component="h1" variant="h5">
+                  Profissionais Cadastrados
+                </Typography>
               </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                <DenseTable 
+                  rows={data}
+                  types={types}
+                />
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
