@@ -2,13 +2,12 @@ import * as React from 'react';
 import { useState, useContext } from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Box,
   Grid,
   Snackbar,
@@ -19,7 +18,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../components/Copyright';
-import api from '../service/api';
 import { Context } from '../context/AuthContext';
 
 const theme = createTheme();

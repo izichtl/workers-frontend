@@ -4,10 +4,6 @@ import Typography from '@mui/material/Typography';
 import Title from './Title';
 import { format } from 'date-fns';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function RegiterCount(props) {
   const { title, count, address } = props;
   return (
