@@ -9,7 +9,9 @@ import {
   TextField,
   Button,
   NativeSelect,
-  InputLabel
+  InputLabel,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -26,19 +28,34 @@ export default function ProfessionalForm(props) {
   const { typeprofessional } = props;
   const [status, setStatus] = useState(false);
   const [typeId, setTypeId] = useState('');
+  const [openSnack, setOpenSnack] = useState(false);
+  const [snackData, setSnackData] = useState({
+    text: 'msg',
+    color: 'info',
+    status: false,
+  });
   const handlerStatus = () => {
     setStatus(!status);
   }
+  const handleCloseSnack = () => {
+    setOpenSnack(false);
+  };
   const handlerTypeProfessional = (event) => {
     setTypeId(event.target.value);
   }
+  let token = '';
+  if (localStorage.getItem('token')) token = localStorage.getItem('token').replace(/"/g,'');
+  const headers = {
+    headers: {
+      Authorization: token,
+    }}
   const formik = useFormik({
     initialValues: {
       nome: 'Seu nome',
       telefone: '',
       email: '',
       tipoprofissional: typeId,
-      situacao: status,
+      situacao: false,
     },
     validationSchema: Yup.object().shape({
       nome: Yup
@@ -60,7 +77,6 @@ export default function ProfessionalForm(props) {
     onSubmit: async (values, {
       setErrors, setStatus, setSubmitting, resetForm,
     }) => {
-      console.log('aqui, formuk');
       try {
         const {
           nome,
@@ -73,29 +89,35 @@ export default function ProfessionalForm(props) {
           telefone,
           email,
           tipoprofissional: typeId,
-          situacao,
-        })
+          situacao: status,
+        },
+        headers,
+        )
           .then((response) => {
-            console.log(response, 'response');
+            if (response.status === 200)  {
+              setSnackData({
+                text: 'Categoria Cadastrad com sucesso',
+                color: 'success',
+                status: true,
+              });
+            setOpenSnack(true);
+            }
           });
         resetForm();
       } catch (err) {
-        // eslint-disable-next-line
-        console.error(err);
-        if (formik.isMountedRef.current) {
-          setStatus({ success: false });
-          setErrors({ submit: err.message });
-          setSubmitting(false);
-        }
+        setSnackData({
+          text: err.response.data.error,
+          color: 'error',
+          status: false,
+        });
+        setOpenSnack(true);
+        resetForm();
       }
     },
   });
 
   useEffect(() => {
-    console.log('entrada');
-    console.log(typeprofessional[0].id);
     setTypeId(typeprofessional[0].id);
-    console.log('type');
   }, [typeprofessional])
   return (
       <ThemeProvider theme={theme}>
@@ -119,16 +141,15 @@ export default function ProfessionalForm(props) {
                     style={{ borderRadius: 50 }}
                     error={Boolean(formik.touched.nome && formik.errors.nome)}
                     helperText={formik.touched.nome && formik.errors.nome}
+                    value={formik.values.nome}
                     onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                     required
                     fullWidth
                     id="nome"
                     label="Nome"
-                    onChange={formik.handleChange}
-                    autoFocus
                     type="text"
                     placeholder="nome completo"
-                    value={formik.values.nome}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -143,7 +164,6 @@ export default function ProfessionalForm(props) {
                     onChange={formik.handleChange}
                     label="Telefone"
                     placeholder="DD+NUMERO"
-                    autoFocus
                     value={formik.values.telefone}
                   />
                 </Grid>
@@ -200,6 +220,19 @@ export default function ProfessionalForm(props) {
               >
                 Cadastrar
               </Button>
+              <Snackbar
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              open={openSnack}
+              autoHideDuration={3000}
+              onClose={handleCloseSnack}
+              >
+              <Alert onClose={handleCloseSnack} severity={snackData.color} sx={{ width: '100%' }}>
+                { snackData.text }
+              </Alert>
+            </Snackbar>
             </Box>
           </Box>
       </ThemeProvider>

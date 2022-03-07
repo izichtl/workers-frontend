@@ -33,17 +33,22 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+  let token = '';
+  if (localStorage.getItem('token')) token = localStorage.getItem('token').replace(/"/g,'');
+  const headers = {
+    headers: {
+      Authorization: token,
+    }}
   useEffect(() => {
     (async () => {
-      await api.get('/professional')
+      await api.get('/professional', headers)
         .then((response) => {
           const { data } = response;
           setData(data);
         });
     })();
     (async () => {
-      await api.get('/type')
+      await api.get('/type', headers)
         .then((response) => {
           const { data } = response;
           setTypes(data);

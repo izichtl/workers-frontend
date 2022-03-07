@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Context } from '../context/AuthContext';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -25,17 +26,22 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+  let token = '';
+  if (localStorage.getItem('token')) token = localStorage.getItem('token').replace(/"/g,'');
+  const headers = {
+    headers: {
+      Authorization: token,
+    }}
   useEffect(() => {
     (async () => {
-      await api.get('/professional')
+      await api.get('/professional', headers)
         .then((response) => {
           const { data } = response;
           setData(data);
         });
     })();
     (async () => {
-      await api.get('/type')
+      await api.get('/type', headers)
         .then((response) => {
           const { data } = response;
           setTypes(data);

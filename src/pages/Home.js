@@ -6,6 +6,7 @@ import {
   Typography,
   Container,
   Button,
+  Link,
 } from '@mui/material';
 // import Container from '@mui/material/Container';
 import Copyright from '../components/Copyright';
@@ -14,6 +15,7 @@ import Copyright from '../components/Copyright';
 
 export default function Home() {
   return (
+    <React.Fragment>
     <Box
       sx={{
         display: 'flex',
@@ -32,7 +34,21 @@ export default function Home() {
         </Typography>
         <Typography variant="body">Aplicação para teste de ingresso, desenvolvido utilizando React/MaterialUI.</Typography>
         <br />
-        <Button variant="contained">Login</Button>
+        <Link href="/login" >
+          <Button
+            sx={{
+              mt:2,
+            }}
+            variant="contained">Login</Button>
+        </Link>
+        <br />
+        <Link href="/dashboard" >
+          <Button
+            sx={{
+              mt:2,
+            }}
+            variant="contained">Dashboard</Button>
+        </Link>
       </Container>
       <Box
         component="footer"
@@ -54,5 +70,6 @@ export default function Home() {
         </Container>
       </Box>
     </Box>
+    </React.Fragment>
   );
 }
